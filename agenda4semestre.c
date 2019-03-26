@@ -9,7 +9,7 @@ typedef struct var{
 } variaveis;
 
 typedef struct pe {
-   char nome[25];
+   char nome[25], cpf[15];
 } pessoa;
 
 variaveis *inicio;
@@ -19,7 +19,7 @@ void listar();
 
 int main () {
 
-    printf("---------- AGENDA ------------");
+    printf("---------- AGENDA -------------");
 
     pbuffer = malloc(sizeof(variaveis));
 
@@ -59,6 +59,8 @@ void inserir() {
 
     printf("\nNome: ");
     scanf("%s", p->nome);
+    printf("\nCPF: ");
+    scanf("%s", p->cpf);
 
 
     inicio->contador++;
