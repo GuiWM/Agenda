@@ -16,6 +16,7 @@ variaveis *inicio;
 
 void inserir();
 void listar();
+void apagar();
 
 int main () {
 
@@ -28,7 +29,7 @@ int main () {
     inicio->contador = 0;
 
     do {
-        printf("\n[>1<] INSERIR\n[>2<] LISTAR\n[>5<] SAIR\n");
+        printf("\n[>1<] INSERIR\n[>2<] LISTAR\n[>3<] APAGAR\n[>5<] SAIR\n");
         scanf("%d", &inicio->escolha);
 
 		switch (inicio->escolha) {
@@ -38,6 +39,9 @@ int main () {
 			case 2:
 				listar();
 				break;
+			case 3:
+				apagar();
+				break;	
 			default:
                 free(pbuffer);
                 exit(1);
@@ -50,7 +54,7 @@ void inserir() {
 
     pessoa *p;
 
-    if ((pbuffer = realloc(pbuffer, sizeof(variaveis) + sizeof(pessoa) + (sizeof(pessoa) * inicio->contador))) == NULL) {
+    if ((pbuffer = (pessoa *) realloc(pbuffer, sizeof(variaveis) + sizeof(pessoa) + (sizeof(pessoa) * inicio->contador))) == NULL) {
        printf("Falta de memória!");
        exit(1);
     }
@@ -75,5 +79,19 @@ void listar() {
         printf("\n%s", p->nome);
         p++;
    }
+   
+   printf("\n");
 
 }
+void apagar() {
+	
+	if (inicio->contador == 0) {
+		printf("------------");
+		printf("AGENDA VAZIA!");
+		printf("------------");	
+	} else if ((pbuffer = (pessoa *) realloc(pbuffer, sizeof(variaveis) + (sizeof(pessoa) * inicio->contador))) != NULL) {
+		printf("\n-------------------------\nPessoa excluida com sucesso...\n-------------------------\n");	
+		inicio->contador--;
+	}	
+	
+}	
