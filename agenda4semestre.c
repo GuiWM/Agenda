@@ -135,7 +135,7 @@ void apagar() {
 			p++;
 			aux++;
 		}	
-		if ((pbuffer = (pessoa *) realloc(pbuffer, sizeof(variaveis) + (sizeof(pessoa) * inicio->contador))) != NULL) {
+		if ((pbuffer = (pessoa *) realloc(pbuffer, sizeof(variaveis) + (sizeof(pessoa) * (inicio->contador - 1)))) != NULL) {
 			printf("\n-------------------------\nPessoa excluida com sucesso...\n-------------------------\n");	
 			inicio->contador--;
 		}	
