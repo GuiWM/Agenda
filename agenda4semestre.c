@@ -4,14 +4,16 @@
 
 void *pbuffer;
 
-typedef struct var{
-	int escolha, contador, i, achei, posicao;
-	char nome[20];
-} variaveis;
 
 typedef struct pe {
    char nome[20], cpf[15];
 } pessoa;
+
+typedef struct var{
+	int escolha, contador, i, achei, posicao, j;
+	char nome[20];
+	pessoa atual;
+} variaveis;
 
 variaveis *inicio;
 
@@ -19,6 +21,7 @@ void inserir();
 void listar();
 void apagar();
 void buscar();
+void insertionSort();
 
 int main () {
 
@@ -73,6 +76,8 @@ void inserir() {
 
 
     inicio->contador++;
+    
+    insertionSort();
 }
 void listar() {
 
@@ -86,7 +91,7 @@ void listar() {
    }
    
    printf("\n");
-
+	
 }
 void apagar() {
 	/*
@@ -135,7 +140,7 @@ void apagar() {
 			p++;
 			aux++;
 		}	
-		if ((pbuffer = (pessoa *) realloc(pbuffer, sizeof(variaveis) + (sizeof(pessoa) * (inicio->contador - 1)))) != NULL) {
+		if ((pbuffer = (pessoa *) realloc(pbuffer, sizeof(variaveis) + (sizeof(pessoa) * inicio->contador))) != NULL) {
 			printf("\n-------------------------\nPessoa excluida com sucesso...\n-------------------------\n");	
 			inicio->contador--;
 		}	
@@ -172,4 +177,21 @@ void buscar() {
 	}	
 	
 	
-}	
+} 
+// Primeiro algoritimo de ordenacao 
+
+void insertionSort(){
+	pessoa *dado;
+	dado = pbuffer + sizeof(variaveis);
+	if(inicio->contador > 1){
+		for (inicio->j = 1; inicio->j < inicio->contador; inicio->j++) {
+			inicio->atual = dado[inicio->j];
+			for (inicio->i = inicio->j - 1; (inicio->i >= 0) && inicio->atual.nome[0] < dado[inicio->i].nome[0]; inicio->i--) {
+				dado[inicio->i + 1] = dado[inicio->i];
+			}
+			dado[inicio->i+1] = inicio->atual;
+			
+		}
+	}
+}
+
