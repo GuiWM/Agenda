@@ -10,9 +10,9 @@ typedef struct pe {
 } pessoa;
 
 typedef struct var{
-	int escolha, contador, i, achei, posicao, j;
+	int escolha, contador, i, achei, posicao, j, min_id;
 	char nome[20];
-	pessoa atual;
+	pessoa atual, min;
 } variaveis;
 
 variaveis *inicio;
@@ -22,6 +22,7 @@ void listar();
 void apagar();
 void buscar();
 void insertionSort();
+void selectionSort();
 
 int main () {
 
@@ -77,7 +78,8 @@ void inserir() {
 
     inicio->contador++;
     
-    insertionSort();
+    //insertionSort();
+    selectionSort();
 }
 void listar() {
 
@@ -194,4 +196,21 @@ void insertionSort(){
 		}
 	}
 }
-
+void selectionSort(){ 
+	pessoa *dado;
+	dado = pbuffer + sizeof(variaveis);
+	inicio->min_id = 0;
+	for (inicio->i=0; inicio->i < inicio->contador-1; inicio->i++) { 
+		 inicio->min = dado[inicio->i]; 
+		 for (inicio->j=inicio->i+1; inicio->j<inicio->contador; inicio->j++) {
+		   if (dado[inicio->j].nome[0] < inicio->min.nome[0]) { 
+			 inicio->min = dado[inicio->j]; 
+			 inicio->min_id = inicio->j; 
+                    } 
+                }
+		 inicio->atual = dado[inicio->i]; 
+		 dado[inicio->i] = dado[inicio->min_id]; 
+		 dado[inicio->min_id] = inicio->atual;
+		 inicio->min_id = inicio->i+1;
+        }
+}
