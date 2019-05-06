@@ -23,6 +23,7 @@ void apagar();
 void buscar();
 void insertionSort();
 void selectionSort();
+void bubbleSort ();
 
 int main () {
 
@@ -79,7 +80,8 @@ void inserir() {
     inicio->contador++;
     
     //insertionSort();
-    selectionSort();
+    //selectionSort();
+    bubbleSort();
 }
 void listar() {
 
@@ -213,4 +215,19 @@ void selectionSort(){
 		 dado[inicio->min_id] = inicio->atual;
 		 inicio->min_id = inicio->i+1;
         }
+}
+void bubbleSort () { 
+	
+	pessoa *dado;
+	dado = pbuffer + sizeof(variaveis);
+	
+	for (inicio->i=0; inicio->i< inicio->contador-1; inicio->i++) { 
+		for (inicio->j=0; inicio->j < inicio->contador - inicio->i - 1; inicio->j++) {
+			if (dado[inicio->j].nome[0] > dado[inicio->j+1].nome[0]) { 					
+				inicio->atual = dado[inicio->j]; 
+				dado[inicio->j] = dado[inicio->j+1]; 
+				dado[inicio->j+1] = inicio->atual; 
+			} 
+		}
+	} 
 }
